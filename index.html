@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adrian Dias · Música ao vivo para casamentos e eventos</title>
+<meta name="description" content="Adrian Dias, músico de voz, violão e piano. Música ao vivo para casamentos, eventos e barzinhos.">
+<meta name="theme-color" content="#24101A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Adrian Dias · Música ao vivo">
+<meta property="og:description" content="Voz, violão e piano para casamentos, eventos e barzinhos.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2324101A'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='30' fill='%23D6A75E'%3EAD%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+/* Pauta musical: o topo é uma pauta de cinco linhas que termina num teclado tocável;
+   o resto segue como o programa de um evento, com o roteiro da cerimônia em papel como peça central. */
+:root {
+  --velvet: #24101A;
+  --velvet-raised: #2F1520;
+  --velvet-deep: #170A10;
+  --rule: #4A2A34;
+  --staff: #6E4A3A;
+  --felt: #8E2232;
+  --ivory: #F3ECE2;
+  --ivory-dim: #C9B8AE;
+  --brass: #D6A75E;
+  --brass-bright: #EBC07C;
+  --brass-wash: rgba(214, 167, 94, 0.12);
+  --paper: #EFE6D8;
+  --paper-ink: #2A1219;
+  --paper-muted: #7D6152;
+  --paper-accent: #8F4F27;
+  --ebony: #120A0D;
+  --ebony-top: #2B1A21;
+
+  --font-display: "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;
+  --font-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  --step-3: clamp(2.125rem, 1.5rem + 2.6vw, 3.5rem);
+  --step-4: clamp(3.5rem, 1.4rem + 9vw, 9rem);
+
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  margin: 0;
+  background: var(--velvet);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, video { max-width: 100%; display: block; }
+[hidden] { display: none !important; }
+a { color: inherit; }
+::selection { background: var(--brass); color: var(--velvet-deep); }
+:focus-visible { outline: 2px solid var(--brass-bright); outline-offset: 3px; }
+
+.wrap {
+  width: 100%;
+  max-width: 1160px;
+  margin-inline: auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+.mono { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.04em; }
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--step-3);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+}
+h2 em, h1 em { font-style: italic; color: var(--brass); }
+.lede { margin: 0; max-width: 60ch; color: var(--ivory-dim); }
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.85em 1.5em;
+  border: 1px solid var(--brass);
+  border-radius: 999px;
+  font: 600 0.9375rem/1 var(--font-body);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.btn-solid { background: var(--brass); color: var(--velvet-deep); }
+.btn-solid:hover { background: var(--brass-bright); border-color: var(--brass-bright); }
+.btn-ghost { background: transparent; color: var(--ivory); }
+.btn-ghost:hover { background: var(--brass-wash); }
+.btn-sm { padding: 0.65em 1.15em; font-size: 0.875rem; }
+
+/* Cabeçalho */
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 30;
+  background: rgba(36, 16, 26, 0.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 31;
+  background: var(--velvet);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 66px;
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand em { font-style: italic; color: var(--brass); }
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav-link { text-decoration: none; font-size: 0.9375rem; color: var(--ivory-dim); transition: color 0.2s; }
+.nav-link:hover { color: var(--ivory); }
+@media (max-width: 780px) { .nav-link { display: none; } }
+
+/* Herói */
+.hero { position: relative; overflow: hidden; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  grid-template-rows: 1fr auto auto 1fr;
+  grid-template-areas: ". photo" "head photo" "foot photo" ". photo";
+  column-gap: clamp(32px, 6vw, 88px);
+  row-gap: clamp(24px, 3.5vw, 40px);
+  padding-block: clamp(40px, 6vw, 88px) clamp(48px, 6vw, 80px);
+}
+.hero-head { grid-area: head; display: grid; gap: clamp(14px, 2vw, 24px); }
+.hero-foot { grid-area: foot; display: grid; gap: 28px; justify-items: start; }
+/* Pauta dupla, como a do piano: uma pauta para cada linha do nome */
+.hero-title {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  display: grid;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--step-4);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+.hero-title > span { position: relative; display: block; }
+.hero-title > span::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -100vw;
+  right: -100vw;
+  top: 0.25em;
+  height: calc(0.15em * 4 + 1px);
+  background: repeating-linear-gradient(to bottom, var(--staff) 0 1px, transparent 1px 0.15em);
+  transform-origin: left center;
+  animation: draw-staff 1.6s cubic-bezier(0.65, 0, 0.2, 1) 0.1s both;
+}
+.hero-title > span + span::before { animation-delay: 0.35s; }
+@keyframes draw-staff { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.hero-photo { grid-area: photo; position: relative; z-index: 1; margin: 0; align-self: center; }
+.hero-photo img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  max-height: min(72vh, 620px);
+  object-fit: cover;
+  object-position: 50% 25%;
+  border-radius: 4px;
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.75);
+}
+.hero-photo figcaption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(23, 10, 16, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--ivory);
+}
+@media (max-width: 860px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "head" "photo" "foot";
+  }
+  .hero-photo img { aspect-ratio: 4 / 5; }
+}
+.hero-lede { margin: 0; max-width: 32rem; font-size: var(--step-1); line-height: 1.5; color: var(--ivory-dim); }
+.hero-lede strong { color: var(--ivory); font-weight: 500; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Teclado */
+.keys-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 12px;
+  color: var(--ivory-dim);
+}
+.keys-caption output { color: var(--brass); font-variant-numeric: tabular-nums; }
+.kbd-hint { display: none; }
+@media (hover: hover) and (pointer: fine) { .kbd-hint { display: inline; } }
+.keyboard {
+  display: flex;
+  height: clamp(104px, 13vw, 172px);
+  border-top: 5px solid var(--felt);
+  background: var(--velvet-deep);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.slot { position: relative; flex: 1 1 0; min-width: 0; }
+.key {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.key-white {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #E2D7C8 0, var(--ivory) 18%, var(--ivory) 100%);
+  border-right: 1px solid #C9BBAA;
+  border-radius: 0 0 5px 5px;
+  box-shadow: inset 0 -6px 0 #DCCFBE;
+  transition: background 0.08s, box-shadow 0.08s;
+}
+.key-black {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  width: 58%;
+  height: 62%;
+  transform: translateX(50%);
+  background: linear-gradient(to bottom, var(--ebony) 0, var(--ebony-top) 88%, var(--ebony) 100%);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.45);
+  transition: background 0.08s;
+}
+@media (hover: hover) {
+  .key-white:hover { background: linear-gradient(to bottom, #E2D7C8 0, #FBF6EF 18%); }
+  .key-black:hover { background: linear-gradient(to bottom, var(--ebony) 0, #3D2630 88%); }
+}
+.key-white.is-down { background: var(--brass-bright); box-shadow: inset 0 -2px 0 var(--brass); }
+.key-black.is-down { background: var(--brass); }
+@media (max-width: 760px) { .slot[data-oct="0"] { display: none; } }
+
+/* Seções */
+.section { padding-block: clamp(72px, 10vw, 136px); }
+.section-raised { background: var(--velvet-raised); }
+.section-head { display: grid; gap: 16px; max-width: 46rem; margin-bottom: clamp(40px, 6vw, 72px); }
+
+/* Ocasiões */
+.occasions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 56px); }
+.occasion { display: grid; gap: 12px; align-content: start; padding-top: 24px; border-top: 1px solid var(--brass); }
+.occasion h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--step-2); line-height: 1.1; }
+.occasion p { margin: 0; color: var(--ivory-dim); }
+.occasion .mono { color: var(--ivory); opacity: 0.72; }
+@media (max-width: 860px) { .occasions { grid-template-columns: 1fr; } }
+
+/* Casamentos */
+.ceremony {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 7vw, 96px);
+  align-items: center;
+}
+.ceremony-copy { display: grid; gap: 20px; justify-items: start; }
+.checklist { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 10px; }
+.checklist li { display: grid; grid-template-columns: 18px 1fr; gap: 12px; align-items: baseline; }
+.checklist li::before { content: ""; height: 1px; background: var(--brass); transform: translateY(-0.32em); }
+.program {
+  margin: 0;
+  padding: clamp(24px, 4vw, 44px);
+  background: var(--paper);
+  color: var(--paper-ink);
+  border-radius: 3px;
+  box-shadow: 0 34px 60px -24px rgba(0, 0, 0, 0.6), 0 2px 0 rgba(0, 0, 0, 0.18);
+  transform: rotate(-1.4deg);
+}
+.program-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 14px;
+  margin-bottom: 6px;
+  border-bottom: 2px solid var(--paper-ink);
+}
+.program-head .mono { text-transform: uppercase; letter-spacing: 0.14em; color: var(--paper-muted); }
+.program-head strong { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: var(--step-2); }
+.program-list { list-style: none; margin: 0; padding: 0; }
+.program-list li {
+  display: grid;
+  grid-template-columns: 2rem auto minmax(1.5rem, 1fr);
+  gap: 12px;
+  align-items: baseline;
+  padding-block: 13px;
+}
+.program-list .n { font-family: var(--font-mono); font-size: var(--step--1); color: var(--paper-muted); font-variant-numeric: tabular-nums; }
+.program-list .moment { font-family: var(--font-display); font-size: 1.1875rem; line-height: 1.25; }
+.program-list .fill { border-bottom: 1.5px dotted var(--paper-muted); text-align: right; min-height: 1px; }
+.handnote { font-family: var(--font-display); font-style: italic; font-size: 1.0625rem; color: var(--paper-accent); }
+.program figcaption { margin-top: 18px; color: var(--paper-muted); }
+@media (max-width: 860px) {
+  .ceremony { grid-template-columns: 1fr; }
+  .program { transform: none; }
+}
+@media (max-width: 420px) {
+  .program-list li { grid-template-columns: 1.6rem 1fr; }
+  .program-list .fill { display: none; }
+}
+
+/* Formatos */
+.formats { border-top: 1px solid var(--rule); }
+.format {
+  display: grid;
+  grid-template-columns: minmax(11rem, 1fr) minmax(0, 1.5fr) minmax(0, 2fr);
+  gap: 8px 48px;
+  align-items: baseline;
+  padding-block: clamp(24px, 3.5vw, 36px);
+  border-bottom: 1px solid var(--rule);
+}
+.format .tempo { margin: 0; color: var(--brass); }
+.format h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--step-2); line-height: 1.1; }
+.format p:last-child { margin: 0; color: var(--ivory-dim); }
+@media (max-width: 760px) { .format { grid-template-columns: 1fr; } }
+
+/* Como funciona */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 56px); }
+.step { display: grid; gap: 10px; align-content: start; }
+.step-n { font-family: var(--font-display); font-style: italic; font-size: var(--step-3); line-height: 1; color: var(--brass); }
+.step h3 { font-size: var(--step-1); font-weight: 600; line-height: 1.3; }
+.step p { margin: 0; color: var(--ivory-dim); }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+
+/* Sobre */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(40px, 7vw, 96px);
+  align-items: center;
+}
+.clip { margin: 0; display: grid; gap: 14px; justify-self: center; width: min(100%, 360px); }
+.clip-frame {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  background: var(--velvet-deep);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.75);
+}
+.clip video { width: 100%; height: 100%; object-fit: cover; }
+.clip-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: linear-gradient(to top, rgba(23, 10, 16, 0.6), rgba(23, 10, 16, 0) 55%);
+}
+.clip-play span {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--brass);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s, background-color 0.2s;
+}
+.clip-play span::before {
+  content: "";
+  margin-left: 6px;
+  border-left: 22px solid var(--velvet-deep);
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+}
+.clip-play:hover span { transform: scale(1.06); background: var(--brass-bright); }
+.clip figcaption { color: var(--ivory-dim); text-align: center; }
+.about-copy { display: grid; gap: 20px; }
+.about-copy p { margin: 0; max-width: 60ch; color: var(--ivory-dim); }
+.about-copy p:first-of-type { color: var(--ivory); font-size: var(--step-1); line-height: 1.5; }
+.facts { margin: 8px 0 0; display: grid; border-top: 1px solid var(--rule); }
+.facts div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--rule); }
+.facts dt { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.06em; color: var(--brass); padding-top: 0.2em; }
+.facts dd { margin: 0; }
+.facts a { text-decoration-color: var(--brass); text-underline-offset: 3px; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .facts div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* Contato */
+.section-contact { background: var(--velvet-deep); }
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(40px, 7vw, 96px); align-items: start; }
+.contact-copy { display: grid; gap: 20px; }
+.contact-copy .alt { color: var(--ivory-dim); margin: 8px 0 0; }
+.contact-copy .alt a { color: var(--ivory); text-decoration-color: var(--brass); text-underline-offset: 3px; }
+.form {
+  display: grid;
+  gap: 18px;
+  padding: clamp(22px, 4vw, 36px);
+  background: var(--velvet-raised);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+}
+.field { display: grid; gap: 6px; min-width: 0; }
+.field-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+@media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+.field label { font-size: 0.875rem; font-weight: 500; color: var(--ivory-dim); }
+.field label span { color: var(--brass); }
+.field input, .field select, .field textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 0.75em 0.9em;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ivory);
+  background: var(--velvet-deep);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+.field input::placeholder, .field textarea::placeholder { color: #8C7770; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--brass); box-shadow: 0 0 0 3px var(--brass-wash); }
+.field textarea { min-height: 112px; resize: vertical; }
+.form .btn { justify-self: start; }
+.msg { display: grid; gap: 12px; padding: 18px; background: var(--velvet-deep); border: 1px dashed var(--staff); border-radius: 10px; }
+.msg-status { margin: 0; color: var(--ivory); }
+.msg-text { margin: 0; white-space: pre-wrap; word-break: break-word; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.6; color: var(--ivory-dim); }
+.msg-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+
+/* Rodapé */
+.site-footer { background: var(--velvet-deep); border-top: 1px solid var(--rule); }
+.footer-inner { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 32px; padding-block: 36px 20px; }
+.footer-inner p { margin: 0; color: var(--ivory-dim); }
+.footer-inner a:not(.brand) { color: var(--ivory); text-decoration-color: var(--brass); text-underline-offset: 3px; }
+.footer-base { padding-block: 0 32px; color: var(--ivory-dim); opacity: 0.7; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Adrian <em>Dias</em></a>
+    <nav class="nav" aria-label="Principal">
+      <a class="nav-link" href="#casamentos">Casamentos</a>
+      <a class="nav-link" href="#formatos">Formatos</a>
+      <a class="nav-link" href="#sobre">Sobre</a>
+      <a class="btn btn-solid btn-sm" href="#contato">Pedir orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="wrap hero-grid">
+      <div class="hero-head">
+        <p class="eyebrow">Músico · Voz, violão &amp; piano</p>
+        <h1 class="hero-title"><span>Adrian</span> <span><em>Dias</em></span></h1>
+      </div>
+      <figure class="hero-photo">
+        <img src="assets/adrian-violao.jpg" alt="Adrian Dias cantando e tocando violão em um bar" width="1080" height="1440" fetchpriority="high">
+        <figcaption class="mono">Ao vivo · voz &amp; violão</figcaption>
+      </figure>
+      <div class="hero-foot">
+        <p class="hero-lede"><strong>Música ao vivo para casamentos, eventos e barzinhos.</strong> Repertório montado com você, para a cerimônia, a festa ou a noite no bar.</p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#contato">Pedir orçamento</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/adriandiias_/" target="_blank" rel="noopener">Ver no Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="keys-caption mono">
+        <span>Toque uma nota<span class="kbd-hint"> · ou use as teclas A a K</span></span>
+        <output id="note-readout" aria-live="polite">Lá 4 · 440 Hz</output>
+      </p>
+    </div>
+    <div class="keyboard" id="keyboard" role="group" aria-label="Teclado de piano. Toque nas teclas para ouvir as notas."></div>
+  </section>
+
+  <section class="section" id="ocasioes">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Onde eu toco</p>
+        <h2>Do <em>sim</em> no altar ao chope de sexta</h2>
+      </div>
+      <div class="occasions">
+        <article class="occasion">
+          <h3>Casamentos</h3>
+          <p>Cerimônia, coquetel e recepção. Cada momento ganha a música que vocês escolherem.</p>
+          <p class="mono">cerimônia · coquetel · recepção</p>
+        </article>
+        <article class="occasion">
+          <h3>Eventos</h3>
+          <p>Aniversários, bodas, confraternizações e eventos corporativos, com repertório ajustado ao público.</p>
+          <p class="mono">aniversários · empresas · celebrações</p>
+        </article>
+        <article class="occasion">
+          <h3>Barzinhos</h3>
+          <p>Noites de voz e violão em bares e restaurantes, com repertório que combina com a casa.</p>
+          <p class="mono">bares · restaurantes · happy hour</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-raised" id="casamentos">
+    <div class="wrap ceremony">
+      <div class="ceremony-copy">
+        <p class="eyebrow">Casamentos</p>
+        <h2>Uma música para <em>cada entrada</em></h2>
+        <p class="lede">A cerimônia tem um roteiro, e a música acompanha cada passo dele. Vocês escolhem as canções de cada momento ou pedem sugestões. O roteiro fica pronto antes do grande dia, para que tudo aconteça no tempo certo.</p>
+        <ul class="checklist">
+          <li>Repertório escolhido junto com os noivos</li>
+          <li>Voz com violão ou piano na cerimônia</li>
+          <li>Música ao vivo no coquetel e na recepção</li>
+        </ul>
+        <a class="btn btn-solid" href="#contato">Consultar uma data</a>
+      </div>
+      <figure class="program" aria-label="Exemplo de roteiro musical de uma cerimônia">
+        <div class="program-head">
+          <span class="mono">Roteiro musical</span>
+          <strong>Cerimônia</strong>
+        </div>
+        <ol class="program-list">
+          <li><span class="n">01</span><span class="moment">Entrada dos padrinhos</span><span class="fill"></span></li>
+          <li><span class="n">02</span><span class="moment">Entrada do noivo</span><span class="fill"></span></li>
+          <li><span class="n">03</span><span class="moment">Daminhas e pajens</span><span class="fill"></span></li>
+          <li><span class="n">04</span><span class="moment">Entrada da noiva</span><span class="fill"><span class="handnote">a música de vocês</span></span></li>
+          <li><span class="n">05</span><span class="moment">Alianças</span><span class="fill"></span></li>
+          <li><span class="n">06</span><span class="moment">Assinaturas</span><span class="fill"></span></li>
+          <li><span class="n">07</span><span class="moment">Saída dos noivos</span><span class="fill"></span></li>
+        </ol>
+        <figcaption class="mono">Cada linha em branco é uma música escolhida por vocês.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="formatos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Formatos</p>
+        <h2>Três formações, <em>um músico</em></h2>
+        <p class="lede">Escolha pelo clima do evento. Dá para combinar mais de um formato ao longo do dia.</p>
+      </div>
+      <div class="formats">
+        <article class="format">
+          <p class="tempo mono">Allegretto · ♩ = 108</p>
+          <h3>Voz &amp; violão</h3>
+          <p>Leve e perto do público. Ideal para barzinhos, coquetéis e festas intimistas.</p>
+        </article>
+        <article class="format">
+          <p class="tempo mono">Andante · ♩ = 76</p>
+          <h3>Voz &amp; piano</h3>
+          <p>Elegante e emocionante. Ideal para cerimônias, jantares e momentos especiais.</p>
+        </article>
+        <article class="format">
+          <p class="tempo mono">Adagio · ♩ = 66</p>
+          <h3>Piano instrumental</h3>
+          <p>Trilha para conversar. Ideal para a chegada dos convidados, recepções e coquetéis.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-raised" id="como-funciona">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Como funciona</p>
+        <h2>Do primeiro contato <em>ao último acorde</em></h2>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-n" aria-hidden="true">1.</span>
+          <h3>Conte sobre o evento</h3>
+          <p>Data, local, tipo de evento e número de convidados. Pelo formulário abaixo ou pelo Instagram.</p>
+        </li>
+        <li class="step">
+          <span class="step-n" aria-hidden="true">2.</span>
+          <h3>Monte o repertório</h3>
+          <p>Você recebe o orçamento e a gente escolhe junto o formato e as músicas de cada momento.</p>
+        </li>
+        <li class="step">
+          <span class="step-n" aria-hidden="true">3.</span>
+          <h3>Aproveite o dia</h3>
+          <p>No dia, a música acontece no tempo combinado. Você só precisa curtir.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="sobre">
+    <div class="wrap about">
+      <figure class="clip">
+        <div class="clip-frame">
+          <video id="clip" controls playsinline preload="none" poster="assets/adrian-piano-poster.jpg" width="720" height="1280">
+            <source src="assets/adrian-piano.mp4" type="video/mp4">
+          </video>
+          <button class="clip-play" type="button" id="clip-play" aria-label="Assistir ao vídeo de Adrian Dias cantando ao piano" hidden><span aria-hidden="true"></span></button>
+        </div>
+        <figcaption class="mono">Ao vivo · voz &amp; piano · 1:31</figcaption>
+      </figure>
+      <div class="about-copy">
+        <p class="eyebrow">Sobre</p>
+        <h2>Música e design, <em>o mesmo cuidado</em></h2>
+        <p>Sou o Adrian Dias. Canto e toco violão e piano em casamentos, eventos e barzinhos.</p>
+        <p>Também sou product designer e trabalho com produtos B2B e B2C. Do design eu trago o jeito de trabalhar: entender quem está do outro lado, planejar cada detalhe e entregar uma experiência que flui do começo ao fim.</p>
+        <dl class="facts">
+          <div><dt>Instrumentos</dt><dd>Voz, violão e piano</dd></div>
+          <div><dt>Ocasiões</dt><dd>Casamentos, eventos e barzinhos</dd></div>
+          <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/adriandiias_/" target="_blank" rel="noopener">@adriandiias_</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-contact" id="contato">
+    <div class="wrap contact">
+      <div class="contact-copy">
+        <p class="eyebrow">Orçamento</p>
+        <h2>Vamos falar do <em>seu evento</em></h2>
+        <p class="lede">Preencha os dados e envie a mensagem pronta. Você recebe a disponibilidade da data e o orçamento.</p>
+        <p class="alt">Prefere falar direto? Mande uma mensagem no <a href="https://ig.me/m/adriandiias_" target="_blank" rel="noopener">direct do Instagram</a>.</p>
+      </div>
+      <form class="form" id="quote-form" novalidate>
+        <div class="field">
+          <label for="f-nome">Seu nome <span aria-hidden="true">*</span></label>
+          <input id="f-nome" name="nome" type="text" autocomplete="name" required placeholder="Como você se chama?">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-tipo">Tipo de evento <span aria-hidden="true">*</span></label>
+            <select id="f-tipo" name="tipo" required>
+              <option value="um casamento">Casamento</option>
+              <option value="um aniversário">Aniversário</option>
+              <option value="um evento corporativo">Evento corporativo</option>
+              <option value="um bar ou restaurante">Bar ou restaurante</option>
+              <option value="um evento">Outro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-data">Data</label>
+            <input id="f-data" name="data" type="date">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-local">Cidade e local</label>
+          <input id="f-local" name="local" type="text" placeholder="Ex.: Campinas, Espaço Jardim">
+        </div>
+        <div class="field">
+          <label for="f-msg">Detalhes</label>
+          <textarea id="f-msg" name="mensagem" placeholder="Horário, número de convidados, músicas que não podem faltar…"></textarea>
+        </div>
+        <button class="btn btn-solid" type="submit" id="f-enviar">Enviar mensagem</button>
+        <div class="msg" id="msg" hidden>
+          <p class="msg-status" id="msg-status" role="status"></p>
+          <pre class="msg-text" id="msg-text"></pre>
+          <div class="msg-actions">
+            <a class="btn btn-ghost btn-sm" id="msg-link" href="#" target="_blank" rel="noopener">Abrir conversa</a>
+            <button class="btn btn-ghost btn-sm" type="button" id="msg-copy">Copiar mensagem</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <a class="brand" href="#inicio">Adrian <em>Dias</em></a>
+    <p>Música ao vivo para casamentos, eventos e barzinhos.</p>
+    <a href="https://www.instagram.com/adriandiias_/" target="_blank" rel="noopener">@adriandiias_</a>
+  </div>
+  <div class="wrap footer-base mono">© 2026 Adrian Dias</div>
+</footer>
+
+<script>
+(function () {
+  /* ===== Configuração =====
+     Número de WhatsApp com DDI e DDD, só dígitos (ex.: "5511999999999").
+     Enquanto estiver vazio, o formulário copia a mensagem e abre o direct do Instagram. */
+  var WHATSAPP = "";
+  var INSTAGRAM_DM = "https://ig.me/m/adriandiias_";
+
+  /* ===== Teclado ===== */
+  var NOMES = ["Dó", "Dó♯", "Ré", "Ré♯", "Mi", "Fá", "Fá♯", "Sol", "Sol♯", "Lá", "Lá♯", "Si"];
+  var BRANCAS = [0, 2, 4, 5, 7, 9, 11];
+  var PRETA_DEPOIS = { 0: 1, 2: 3, 5: 6, 7: 8, 9: 10 };
+  var OITAVA_INICIAL = 3, OITAVAS = 3;
+  var teclado = document.getElementById("keyboard");
+  var leitura = document.getElementById("note-readout");
+
+  function nomeDaNota(midi) { return NOMES[midi % 12] + " " + (Math.floor(midi / 12) - 1); }
+  function frequencia(midi) { return 440 * Math.pow(2, (midi - 69) / 12); }
+
+  function criarTecla(midi, cor) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "key key-" + cor;
+    b.tabIndex = -1;
+    b.dataset.midi = midi;
+    b.setAttribute("aria-label", nomeDaNota(midi));
+    return b;
+  }
+
+  for (var o = 0; o < OITAVAS; o++) {
+    BRANCAS.forEach(function (s) {
+      var base = 12 * (OITAVA_INICIAL + 1 + o);
+      var slot = document.createElement("div");
+      slot.className = "slot";
+      slot.dataset.oct = o;
+      slot.appendChild(criarTecla(base + s, "white"));
+      if (PRETA_DEPOIS[s] !== undefined) slot.appendChild(criarTecla(base + PRETA_DEPOIS[s], "black"));
+      teclado.appendChild(slot);
+    });
+  }
+
+  var ctx = null, saida = null;
+  function audio() {
+    if (!ctx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      ctx = new AC();
+      var comp = ctx.createDynamicsCompressor();
+      saida = ctx.createGain();
+      saida.gain.value = 0.32;
+      saida.connect(comp);
+      comp.connect(ctx.destination);
+    }
+    if (ctx.state === "suspended") ctx.resume();
+    return ctx;
+  }
+
+  function tocar(midi) {
+    var f = frequencia(midi);
+    leitura.textContent = nomeDaNota(midi) + " · " + (f < 100 ? f.toFixed(1) : Math.round(f)) + " Hz";
+    var c = audio();
+    if (!c) return;
+    var t = c.currentTime;
+    var env = c.createGain();
+    env.gain.setValueAtTime(0.0001, t);
+    env.gain.exponentialRampToValueAtTime(0.9, t + 0.008);
+    env.gain.exponentialRampToValueAtTime(0.28, t + 0.3);
+    env.gain.exponentialRampToValueAtTime(0.0001, t + 2.4);
+    var filtro = c.createBiquadFilter();
+    filtro.type = "lowpass";
+    filtro.frequency.setValueAtTime(Math.min(f * 9, 12000), t);
+    filtro.frequency.exponentialRampToValueAtTime(Math.max(f * 2.5, 500), t + 1.4);
+    [["triangle", 1, 0.6], ["sine", 2, 0.22], ["sine", 3, 0.07]].forEach(function (p) {
+      var osc = c.createOscillator();
+      var g = c.createGain();
+      osc.type = p[0];
+      osc.frequency.value = f * p[1];
+      g.gain.value = p[2];
+      osc.connect(g);
+      g.connect(filtro);
+      osc.start(t);
+      osc.stop(t + 2.5);
+    });
+    filtro.connect(env);
+    env.connect(saida);
+  }
+
+  function apertar(tecla) {
+    tecla.classList.add("is-down");
+    tocar(Number(tecla.dataset.midi));
+  }
+  function soltar(tecla) { tecla.classList.remove("is-down"); }
+
+  teclado.addEventListener("pointerdown", function (e) {
+    var tecla = e.target.closest(".key");
+    if (!tecla) return;
+    if (tecla.hasPointerCapture && tecla.hasPointerCapture(e.pointerId)) tecla.releasePointerCapture(e.pointerId);
+    apertar(tecla);
+  });
+  teclado.addEventListener("pointerover", function (e) {
+    var tecla = e.target.closest(".key");
+    if (tecla && e.buttons === 1) apertar(tecla);
+  });
+  ["pointerup", "pointerout", "pointercancel"].forEach(function (tipo) {
+    teclado.addEventListener(tipo, function (e) {
+      var tecla = e.target.closest(".key");
+      if (tecla) soltar(tecla);
+    });
+  });
+
+  var MAPA = { a: 0, w: 1, s: 2, e: 3, d: 4, f: 5, t: 6, g: 7, y: 8, h: 9, u: 10, j: 11, k: 12 };
+  function digitando(el) { return el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)); }
+  function teclaDo(e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || digitando(e.target)) return null;
+    var semitom = MAPA[e.key && e.key.toLowerCase()];
+    if (semitom === undefined) return null;
+    return teclado.querySelector('[data-midi="' + (60 + semitom) + '"]');
+  }
+  document.addEventListener("keydown", function (e) {
+    var tecla = teclaDo(e);
+    if (tecla && !e.repeat) apertar(tecla);
+  });
+  document.addEventListener("keyup", function (e) {
+    var tecla = teclaDo(e);
+    if (tecla) soltar(tecla);
+  });
+
+  /* ===== Vídeo ===== */
+  var video = document.getElementById("clip");
+  var play = document.getElementById("clip-play");
+  video.controls = false;
+  play.hidden = false;
+  function iniciouVideo() { play.hidden = true; video.controls = true; }
+  play.addEventListener("click", function () {
+    iniciouVideo();
+    var p = video.play();
+    if (p && p.catch) p.catch(function () {});
+  });
+  video.addEventListener("play", iniciouVideo);
+
+  /* ===== Formulário de orçamento ===== */
+  var form = document.getElementById("quote-form");
+  var botao = document.getElementById("f-enviar");
+  var caixa = document.getElementById("msg");
+  var status = document.getElementById("msg-status");
+  var texto = document.getElementById("msg-text");
+  var link = document.getElementById("msg-link");
+  var copiar = document.getElementById("msg-copy");
+
+  botao.textContent = WHATSAPP ? "Enviar pelo WhatsApp" : "Enviar pelo Instagram";
+
+  function formatarData(iso) {
+    var p = iso.split("-");
+    return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : iso;
+  }
+
+  function montarMensagem(d) {
+    var pedido = "Quero um orçamento de música ao vivo para " + d.tipo;
+    if (d.data) pedido += " no dia " + formatarData(d.data);
+    if (d.local) pedido += ", em " + d.local;
+    var linhas = ["Olá, Adrian! Meu nome é " + d.nome + ".", pedido + "."];
+    if (d.mensagem) linhas.push("", d.mensagem);
+    return linhas.join("\n");
+  }
+
+  function copiarTexto(t) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(t).then(function () { return true; }, function () { return false; });
+    }
+    return Promise.resolve(false);
+  }
+
+  function selecionarTexto() {
+    var r = document.createRange();
+    r.selectNodeContents(texto);
+    var s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    var fd = new FormData(form);
+    var d = {};
+    ["nome", "tipo", "data", "local", "mensagem"].forEach(function (k) { d[k] = String(fd.get(k) || "").trim(); });
+    var msg = montarMensagem(d);
+    texto.textContent = msg;
+    caixa.hidden = false;
+
+    if (WHATSAPP) {
+      var url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+      link.href = url;
+      link.textContent = "Abrir WhatsApp";
+      var aba = window.open(url, "_blank", "noopener");
+      status.textContent = aba !== null
+        ? "O WhatsApp abriu em outra aba com a mensagem pronta. É só enviar."
+        : "Toque em Abrir WhatsApp para enviar a mensagem abaixo.";
+    } else {
+      link.href = INSTAGRAM_DM;
+      link.textContent = "Abrir direct do Instagram";
+      var copia = copiarTexto(msg);
+      window.open(INSTAGRAM_DM, "_blank", "noopener");
+      copia.then(function (ok) {
+        status.textContent = ok
+          ? "Mensagem copiada. Cole no direct do Instagram que abriu em outra aba."
+          : "Copie a mensagem abaixo e cole no direct do Instagram.";
+      });
+    }
+  });
+
+  copiar.addEventListener("click", function () {
+    copiarTexto(texto.textContent).then(function (ok) {
+      if (ok) { copiar.textContent = "Copiada"; setTimeout(function () { copiar.textContent = "Copiar mensagem"; }, 1800); }
+      else selecionarTexto();
+    });
+  });
+})();
+</script>
+</body>
+</html>
