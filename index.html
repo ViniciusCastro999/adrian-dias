@@ -435,44 +435,32 @@ body::before {
 
 /* Contato */
 .section-contact { background: var(--velvet-deep); }
-.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(40px, 7vw, 96px); align-items: start; }
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 96px); align-items: center; }
 .contact-copy { display: grid; gap: 20px; }
-.contact-copy .alt { color: var(--ivory-dim); margin: 8px 0 0; }
-.contact-copy .alt a { color: var(--ivory); text-decoration-color: var(--brass); text-underline-offset: 3px; }
-.form {
+.wa-card {
   display: grid;
-  gap: 18px;
-  padding: clamp(22px, 4vw, 36px);
+  gap: 20px;
+  justify-items: start;
+  padding: clamp(24px, 4vw, 40px);
   background: var(--velvet-raised);
   border: 1px solid var(--rule);
   border-radius: 14px;
 }
-.field { display: grid; gap: 6px; min-width: 0; }
-.field-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
-@media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
-.field label { font-size: 0.875rem; font-weight: 500; color: var(--ivory-dim); }
-.field label span { color: var(--brass); }
-.field input, .field select, .field textarea {
-  width: 100%;
-  min-width: 0;
-  padding: 0.75em 0.9em;
-  font: inherit;
-  font-size: 1rem;
-  color: var(--ivory);
-  background: var(--velvet-deep);
-  border: 1px solid var(--rule);
-  border-radius: 10px;
-  transition: border-color 0.2s;
+.wa-label { margin: 0; text-transform: uppercase; letter-spacing: 0.14em; color: var(--brass); }
+.wa-number {
+  margin: -8px 0 0;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: 1.1;
+  font-variant-numeric: lining-nums;
+  white-space: nowrap;
 }
-.field input::placeholder, .field textarea::placeholder { color: #8C7770; }
-.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--brass); box-shadow: 0 0 0 3px var(--brass-wash); }
-.field textarea { min-height: 112px; resize: vertical; }
-.form .btn { justify-self: start; }
-.msg { display: grid; gap: 12px; padding: 18px; background: var(--velvet-deep); border: 1px dashed var(--staff); border-radius: 10px; }
-.msg-status { margin: 0; color: var(--ivory); }
-.msg-text { margin: 0; white-space: pre-wrap; word-break: break-word; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.6; color: var(--ivory-dim); }
-.msg-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn-lg { padding: 1em 1.75em; font-size: 1rem; }
+.wa-tips { display: grid; gap: 10px; width: 100%; padding-top: 20px; border-top: 1px solid var(--rule); }
+.wa-tips p { margin: 0; color: var(--ivory-dim); }
+.wa-tips .checklist { margin: 0; }
 @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+@media (max-width: 380px) { .wa-number { font-size: 1.875rem; } }
 
 /* Rodapé */
 .site-footer { background: var(--velvet-deep); border-top: 1px solid var(--rule); }
@@ -624,7 +612,7 @@ body::before {
         <li class="step">
           <span class="step-n" aria-hidden="true">1.</span>
           <h3>Conte sobre o evento</h3>
-          <p>Data, local, tipo de evento e número de convidados. Pelo formulário abaixo, pelo WhatsApp ou pelo Instagram.</p>
+          <p>Data, local, tipo de evento e número de convidados. É só chamar no WhatsApp.</p>
         </li>
         <li class="step">
           <span class="step-n" aria-hidden="true">2.</span>
@@ -670,48 +658,21 @@ body::before {
       <div class="contact-copy">
         <p class="eyebrow">Orçamento</p>
         <h2>Vamos falar do <em>seu evento</em></h2>
-        <p class="lede">Preencha os dados e envie a mensagem pronta. Você recebe a disponibilidade da data e o orçamento.</p>
-        <p class="alt">Prefere falar direto? Chame no WhatsApp <a href="https://wa.me/5535998102143" target="_blank" rel="noopener">(35) 99810-2143</a> ou no <a href="https://ig.me/m/adriandiias_" target="_blank" rel="noopener">direct do Instagram</a>.</p>
+        <p class="lede">Chame no WhatsApp e conte os detalhes. Você recebe a disponibilidade da data e o orçamento.</p>
       </div>
-      <form class="form" id="quote-form" novalidate>
-        <div class="field">
-          <label for="f-nome">Seu nome <span aria-hidden="true">*</span></label>
-          <input id="f-nome" name="nome" type="text" autocomplete="name" required placeholder="Como você se chama?">
+      <div class="wa-card">
+        <p class="wa-label mono">WhatsApp</p>
+        <p class="wa-number">(35) 99810-2143</p>
+        <a class="btn btn-solid btn-lg" href="https://wa.me/5535998102143?text=Ol%C3%A1%2C%20Adrian!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20m%C3%BAsica%20ao%20vivo." target="_blank" rel="noopener">Pedir orçamento no WhatsApp</a>
+        <div class="wa-tips">
+          <p class="mono">Para agilizar, conte na mensagem:</p>
+          <ul class="checklist">
+            <li>Data e horário do evento</li>
+            <li>Cidade e local</li>
+            <li>Tipo de evento e número de convidados</li>
+          </ul>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="f-tipo">Tipo de evento <span aria-hidden="true">*</span></label>
-            <select id="f-tipo" name="tipo" required>
-              <option value="um casamento">Casamento</option>
-              <option value="um aniversário">Aniversário</option>
-              <option value="um evento corporativo">Evento corporativo</option>
-              <option value="um bar ou restaurante">Bar ou restaurante</option>
-              <option value="um evento">Outro</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-data">Data</label>
-            <input id="f-data" name="data" type="date">
-          </div>
-        </div>
-        <div class="field">
-          <label for="f-local">Cidade e local</label>
-          <input id="f-local" name="local" type="text" placeholder="Ex.: Campinas, Espaço Jardim">
-        </div>
-        <div class="field">
-          <label for="f-msg">Detalhes</label>
-          <textarea id="f-msg" name="mensagem" placeholder="Horário, número de convidados, músicas que não podem faltar…"></textarea>
-        </div>
-        <button class="btn btn-solid" type="submit" id="f-enviar">Enviar mensagem</button>
-        <div class="msg" id="msg" hidden>
-          <p class="msg-status" id="msg-status" role="status"></p>
-          <pre class="msg-text" id="msg-text"></pre>
-          <div class="msg-actions">
-            <a class="btn btn-ghost btn-sm" id="msg-link" href="#" target="_blank" rel="noopener">Abrir conversa</a>
-            <button class="btn btn-ghost btn-sm" type="button" id="msg-copy">Copiar mensagem</button>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
   </section>
 </main>
@@ -727,12 +688,6 @@ body::before {
 
 <script>
 (function () {
-  /* ===== Configuração =====
-     Número de WhatsApp com DDI e DDD, só dígitos (ex.: "5511999999999").
-     Enquanto estiver vazio, o formulário copia a mensagem e abre o direct do Instagram. */
-  var WHATSAPP = "5535998102143";
-  var INSTAGRAM_DM = "https://ig.me/m/adriandiias_";
-
   /* ===== Teclado ===== */
   var NOMES = ["Dó", "Dó♯", "Ré", "Ré♯", "Mi", "Fá", "Fá♯", "Sol", "Sol♯", "Lá", "Lá♯", "Si"];
   var BRANCAS = [0, 2, 4, 5, 7, 9, 11];
@@ -864,84 +819,6 @@ body::before {
     if (p && p.catch) p.catch(function () {});
   });
   video.addEventListener("play", iniciouVideo);
-
-  /* ===== Formulário de orçamento ===== */
-  var form = document.getElementById("quote-form");
-  var botao = document.getElementById("f-enviar");
-  var caixa = document.getElementById("msg");
-  var status = document.getElementById("msg-status");
-  var texto = document.getElementById("msg-text");
-  var link = document.getElementById("msg-link");
-  var copiar = document.getElementById("msg-copy");
-
-  botao.textContent = WHATSAPP ? "Enviar pelo WhatsApp" : "Enviar pelo Instagram";
-
-  function formatarData(iso) {
-    var p = iso.split("-");
-    return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : iso;
-  }
-
-  function montarMensagem(d) {
-    var pedido = "Quero um orçamento de música ao vivo para " + d.tipo;
-    if (d.data) pedido += " no dia " + formatarData(d.data);
-    if (d.local) pedido += ", em " + d.local;
-    var linhas = ["Olá, Adrian! Meu nome é " + d.nome + ".", pedido + "."];
-    if (d.mensagem) linhas.push("", d.mensagem);
-    return linhas.join("\n");
-  }
-
-  function copiarTexto(t) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(t).then(function () { return true; }, function () { return false; });
-    }
-    return Promise.resolve(false);
-  }
-
-  function selecionarTexto() {
-    var r = document.createRange();
-    r.selectNodeContents(texto);
-    var s = window.getSelection();
-    s.removeAllRanges();
-    s.addRange(r);
-  }
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (!form.reportValidity()) return;
-    var fd = new FormData(form);
-    var d = {};
-    ["nome", "tipo", "data", "local", "mensagem"].forEach(function (k) { d[k] = String(fd.get(k) || "").trim(); });
-    var msg = montarMensagem(d);
-    texto.textContent = msg;
-    caixa.hidden = false;
-
-    if (WHATSAPP) {
-      var url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
-      link.href = url;
-      link.textContent = "Abrir WhatsApp";
-      var aba = window.open(url, "_blank", "noopener");
-      status.textContent = aba !== null
-        ? "O WhatsApp abriu em outra aba com a mensagem pronta. É só enviar."
-        : "Toque em Abrir WhatsApp para enviar a mensagem abaixo.";
-    } else {
-      link.href = INSTAGRAM_DM;
-      link.textContent = "Abrir direct do Instagram";
-      var copia = copiarTexto(msg);
-      window.open(INSTAGRAM_DM, "_blank", "noopener");
-      copia.then(function (ok) {
-        status.textContent = ok
-          ? "Mensagem copiada. Cole no direct do Instagram que abriu em outra aba."
-          : "Copie a mensagem abaixo e cole no direct do Instagram.";
-      });
-    }
-  });
-
-  copiar.addEventListener("click", function () {
-    copiarTexto(texto.textContent).then(function (ok) {
-      if (ok) { copiar.textContent = "Copiada"; setTimeout(function () { copiar.textContent = "Copiar mensagem"; }, 1800); }
-      else selecionarTexto();
-    });
-  });
 })();
 </script>
 </body>
